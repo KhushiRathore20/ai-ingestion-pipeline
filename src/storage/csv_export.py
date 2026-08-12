@@ -1,5 +1,19 @@
 import csv
 import os
+import re
+from html import unescape
+
+
+def clean_html(text):
+    """Remove HTML tags and clean extra whitespace."""
+    if not text:
+        return ""
+
+    text = unescape(str(text))
+    text = re.sub(r"<[^>]+>", " ", text)
+    text = re.sub(r"\s+", " ", text)
+
+    return text.strip()
 
 
 def export_papers(papers, path="output/papers.csv"):
@@ -60,7 +74,7 @@ def export_jobs(jobs, path="output/jobs.csv"):
                 "date": job.get("date", ""),
                 "is_remote": job.get("is_remote", False),
                 "role_family": job.get("role_family", ""),
-                "description": job.get("description", ""),
+                "description": clean_html(job.get("description", "")),
             })
 
 
@@ -89,8 +103,8 @@ def export_news(news, path="output/news.csv"):
                 "recordType": item.get("recordType", "NEWS"),
                 "source_name": item.get("source_name", ""),
                 "source_url": item.get("source_url", ""),
-                "title": item.get("title", ""),
-                "content": item.get("content", ""),
+                "title": clean_html(item.get("title", "")),
+                "content": clean_html(item.get("content", "")),
                 "published_date": item.get("published_date", ""),
             })
 
