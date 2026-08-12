@@ -1,16 +1,26 @@
 from src.resolver.entity_resolver import resolve_entity
 
 
-tests = [
-    "OpenAI",
-    "Open AI",
-    "OpenAI Inc.",
-    "Google",
-    "Google DeepMind",
-    "HuggingFace",
-    "NVIDIA Corporation",
-]
+def test_openai_resolution():
+    result = resolve_entity("OpenAI")
+    assert result is not None
 
 
-for name in tests:
-    print(f"{name} -> {resolve_entity(name)}")
+def test_open_ai_resolution():
+    result = resolve_entity("Open AI")
+    assert result is not None
+
+
+def test_google_resolution():
+    result = resolve_entity("Google")
+    assert result is not None
+
+
+def test_huggingface_resolution():
+    result = resolve_entity("HuggingFace")
+    assert result is not None
+
+
+def test_nvidia_resolution():
+    result = resolve_entity("NVIDIA Corporation")
+    assert result is not None

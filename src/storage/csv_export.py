@@ -93,3 +93,41 @@ def export_news(news, path="output/news.csv"):
                 "content": item.get("content", ""),
                 "published_date": item.get("published_date", ""),
             })
+
+
+def export_startups(startups, path="output/startups.csv"):
+    os.makedirs("output", exist_ok=True)
+
+    if not startups:
+        return
+
+    fieldnames = list(startups[0].keys())
+
+    with open(path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(
+            f,
+            fieldnames=fieldnames,
+            extrasaction="ignore",
+        )
+
+        writer.writeheader()
+        writer.writerows(startups)
+
+
+def export_products(products, path="output/products.csv"):
+    os.makedirs("output", exist_ok=True)
+
+    if not products:
+        return
+
+    fieldnames = list(products[0].keys())
+
+    with open(path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(
+            f,
+            fieldnames=fieldnames,
+            extrasaction="ignore",
+        )
+
+        writer.writeheader()
+        writer.writerows(products)

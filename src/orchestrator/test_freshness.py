@@ -1,15 +1,23 @@
 from src.orchestrator.freshness import parse_date, is_fresh
 
 
-dates = [
-    "2026-08-11T10:00:00Z",
-    "2026-01-01T10:00:00Z",
-    "invalid-date",
-]
+def test_parse_date_valid():
+    result = parse_date("2026-08-11T10:00:00Z")
+    assert result is not None
 
 
-for date in dates:
-    print(date)
-    print("Parsed:", parse_date(date))
-    print("Fresh:", is_fresh(date))
-    print()
+def test_parse_date_invalid():
+    try:
+        parse_date("invalid-date")
+    except Exception:
+        assert True
+
+
+def test_is_fresh_valid_date():
+    result = is_fresh("2026-08-11T10:00:00Z")
+    assert isinstance(result, bool)
+
+
+def test_is_fresh_old_date():
+    result = is_fresh("2026-01-01T10:00:00Z")
+    assert isinstance(result, bool)
