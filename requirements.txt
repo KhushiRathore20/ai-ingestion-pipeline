@@ -1,0 +1,6 @@
+aiohttp==3.10.5
+async-timeout==4.0.3
+pydantic==2.8.2
+python-dotenv==1.0.1
+tenacity==8.5.0
+lxml==5.2.2
